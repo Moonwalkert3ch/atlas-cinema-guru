@@ -9,9 +9,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     GitHubProvider({
-      clientId: process.env.AUTH_GITHUB_ID, // Your GitHub client ID
-      clientSecret: process.env.AUTH_GITHUB_SECRET, // Your GitHub client secret
-    }),
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      authorization: {
+          params: {
+              prompt: "consent",
+              access_type: "offline",
+              response_type: "code",
+          },
+      },
+  })
   ],
   callbacks: {
     authorized: async ({ auth }) => {
