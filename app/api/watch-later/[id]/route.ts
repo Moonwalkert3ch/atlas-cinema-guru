@@ -28,8 +28,16 @@ export const GET = auth(
       return NextResponse.json({ message: "Already added to Watch Later" });
     }
 
-    await insertWatchLater(id, email);
-    return NextResponse.json({ message: "Watch Later Added" });
+    try {
+      await insertWatchLater(id, email);
+      return NextResponse.json({ message: "Watch Later Added" });
+    } catch (error) {
+      console.error("Database Error:", error);
+      return NextResponse.json(
+        { error: "Failed to add Watch Later" },
+        { status: 500 }
+      );
+    }
   }
 );
 
@@ -42,7 +50,15 @@ export const DELETE = auth(
       user: { email }, //@ts-ignore
     } = req.auth;
 
-    await deleteWatchLater(id, email);
-    return NextResponse.json({ message: "Watch Later removed" });
+    try {
+      await deleteWatchLater(id, email);
+      return NextResponse.json({ message: "Watch Later removed" });
+    } catch (error) {
+      console.error("Database Error:", error);
+      return NextResponse.json(
+        { error: "Failed to remove Watch Later" },
+        { status: 500 }
+      );
+    }
   }
 );
