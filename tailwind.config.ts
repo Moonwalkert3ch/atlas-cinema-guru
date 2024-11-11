@@ -18,7 +18,7 @@ export default {
           filter: 'brightness(0) invert(1) contrast(50)',
         },
         '.icon-white-filled': {
-          filter: 'brightness(0) invert(1) contrast(100)', // Makes it solid white
+          filter: 'none', // Makes it solid white
         },
       });
     }),
