@@ -9,7 +9,7 @@ import { auth } from "@/auth";
 export const GET = auth(
   //@ts-ignore
   async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const { id } = params;
+    const { id } = await params;
 
     //@ts-ignore
     if (!req.auth) {
